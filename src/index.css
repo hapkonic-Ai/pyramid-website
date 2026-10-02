@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* light luxurious palette, client logo derived */
+  --color-cream: #fbf7ef;
+  --color-ivory: #fdfbf6;
+  --color-sand: #f3eada;
+
+  --color-ink: #1b150e;
+  --color-ink-soft: #6b5f4e;
+
+  --color-orange-300: #fbc57d;
+  --color-orange-400: #f9a83b;
+  --color-orange-500: #f7931e;
+  --color-orange-600: #e87e0a;
+
+  --color-amber-300: #fcd07e;
+  --color-amber-400: #fbbf24;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-marquee-slow: marquee 46s linear infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-16px) scale(1.04); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 0.9; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-orange-500);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #e4d9c3;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-orange-500);
+}
+
+/* ---------- custom utilities ---------- */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* kept name for compatibility, now an orange gradient */
+.text-gradient-gold {
+  background: linear-gradient(120deg, #fbbf24 0%, #f7931e 45%, #e87e0a 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 6s linear infinite;
+}
+
+@keyframes shimmer-text {
+  to { background-position: 200% center; }
+}
+
+/* white glass card */
+.card-glass {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(27, 21, 14, 0.08);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 50px -20px rgba(27, 21, 14, 0.18);
+}
+
+/* warm orange glow */
+.glow-gold {
+  box-shadow: 0 0 45px -10px rgba(247, 147, 30, 0.5);
+}
+
+.ring-conic {
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 0%,
+    rgba(247, 147, 30, 0.9) 12%,
+    transparent 26%,
+    transparent 50%,
+    rgba(251, 191, 36, 0.45) 62%,
+    transparent 80%
+  );
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animate-angle {
+  animation: rotate-angle 5s linear infinite;
+}
+@keyframes rotate-angle {
+  to { --angle: 360deg; }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* soft dot texture for icon tiles */
+.dot-pattern {
+  position: relative;
+}
+.dot-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1.2px, transparent 1.2px);
+  background-size: 14px 14px;
+  pointer-events: none;
+}
+
+.dot-pattern-ink {
+  background-image: radial-gradient(rgba(27, 21, 14, 0.10) 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+
+/* warm photo shadow used across the site */
+.photo-shadow {
+  box-shadow: 0 30px 60px -25px rgba(27, 21, 14, 0.35);
+}
+
+/* classical-painting photo treatment */
+.paint-warm {
+  filter: sepia(0.22) saturate(1.12) contrast(1.03) brightness(1.02);
+}
+
+.paint-warm-deep {
+  filter: sepia(0.35) saturate(1.15) contrast(1.05) brightness(1.0);
+}
+
+.paint-warm-soft {
+  filter: sepia(0.1) saturate(1.05);
+}
+
+/* gallery frame: cream matting + fine ink keyline + warm shadow */
+.art-frame {
+  border: 6px solid #fdfbf6;
+  box-shadow:
+    0 0 0 1px rgba(27, 21, 14, 0.08),
+    0 30px 60px -25px rgba(27, 21, 14, 0.35);
+}
